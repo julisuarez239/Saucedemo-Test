@@ -24,9 +24,13 @@ public class ShoppingTask implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
+                WaitUntil.the(ShoppingUser.SEL_LIST.of(option), WebElementStateMatchers.isEnabled())
+                        .forNoMoreThan(5).seconds(),
                 Click.on(ShoppingUser.SEL_LIST.of(option)),
                 Click.on(ShoppingUser.SEL_PURCHASE.of(product)),
                 Click.on(ShoppingUser.BTN_ADD_CARD),
+                WaitUntil.the(ShoppingUser.BTN_SHOPPING_CART, WebElementStateMatchers.isEnabled())
+                        .forNoMoreThan(5).seconds(),
                 Click.on(ShoppingUser.BTN_SHOPPING_CART),
                 WaitMoment.pageInSeconds(30)
         );
