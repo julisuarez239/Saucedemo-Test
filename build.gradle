@@ -1,0 +1,42 @@
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+apply plugin: 'java'
+//apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.4.34")
+    }
+}
+
+dependencies {
+    implementation "org.slf4j:slf4j-simple:2.0.3"
+    implementation 'net.serenity-bdd:serenity-core:3.2.5'
+    implementation 'net.serenity-bdd:serenity-junit:3.2.5'
+    implementation 'net.serenity-bdd:serenity-cucumber:3.2.5'
+    implementation 'net.serenity-bdd:serenity-screenplay:3.2.5'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.1.4'
+}
+
+tasks.withType(Test) {
+    maxParallelForks = 3
+    systemProperties = System.properties
+}
+
+gradle.startParameter.continueOnFailure = true
