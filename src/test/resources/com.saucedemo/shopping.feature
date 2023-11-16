@@ -1,6 +1,6 @@
-Feature: user use auto complete in the application
+Feature: user buy a product in the application
 
-  Scenario Outline: user use auto complete in the application
+  Scenario Outline: user buy a product in the application
     Given user open application
     And login in aplication
     When purchasing process
